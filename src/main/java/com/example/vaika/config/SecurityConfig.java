@@ -30,6 +30,7 @@ public class SecurityConfig {
                         requests.requestMatchers(HttpMethod.POST,"/auth").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/annonces").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/login/logout").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/").permitAll()
                                 .anyRequest().authenticated()
                 );
         return  http.build();
