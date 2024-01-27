@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.vaika.modele.Admin;
 import com.example.vaika.modele.Utilisateur;
 import jdk.jshell.execution.Util;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

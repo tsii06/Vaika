@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-
 public class LoginController {
 
     private final UtilisateurService utilisateurService;
@@ -25,14 +24,13 @@ public class LoginController {
         this.utilisateurService = utilisateurService;
         this.jwtUtil=jwtUtil;
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @PostMapping("/auth")
     public ResponseEntity<Data> login(@RequestBody Utilisateur user) {
         Utilisateur u = utilisateurService.login(user);
         String token = JwtUtil.createToken(u);
         return ResponseEntity.ok(new Data(u, token, "Welcome"));
     }
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login/logout")
     public ResponseEntity<Data> logout(HttpServletRequest request) {
         try {

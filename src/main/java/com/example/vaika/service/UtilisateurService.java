@@ -1,5 +1,6 @@
 package com.example.vaika.service;
 
+import com.example.vaika.modele.Admin;
 import com.example.vaika.modele.Utilisateur;
 import com.example.vaika.repo.UtilisateurRepository;
 import jakarta.persistence.EntityManager;
@@ -24,4 +25,5 @@ public class UtilisateurService {
         }
         throw new RuntimeException("Unknwn password");
     }
+
 }

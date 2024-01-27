@@ -29,7 +29,6 @@ public class StatistiqueService {
     public List<Statistique[]> getBestSeller(String customQuery) {
         return jdbcTemplate.query(customQuery, (resultSet, rowNum) -> {
             int nombreVentes = resultSet.getInt("nombre");
-            LocalDate jourVente = resultSet.getDate("datevendu").toLocalDate();
             Utilisateur utilisateur = new Utilisateur();
             utilisateur.setNom(resultSet.getString("nom"));
             return new Statistique[]{new Statistique(nombreVentes, utilisateur)};

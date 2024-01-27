@@ -67,7 +67,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-
         <!-- Dépendance pour gérer les objets de transfert de données (DTO) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
