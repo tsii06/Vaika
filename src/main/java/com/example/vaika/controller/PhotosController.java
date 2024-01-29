@@ -5,6 +5,7 @@ import com.example.vaika.modele.Photos;
 import com.example.vaika.modele.Utilisateur;
 import com.example.vaika.repo.PhotosRepository;
 import com.example.vaika.service.PhotosService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,10 +37,11 @@ public class PhotosController {
         }
         return photos;
     }
-
+    @Transactional
     @GetMapping("/photos/{idAnnonce}")
-    public List<Photos> getPhotoByIdAnnonce(@PathVariable(value = "id") int annonceId) {
+    public List<Photos> getPhotoByIdAnnonce(@PathVariable(value = "idAnnonce") int annonceId) {
         return photosRepository.findByIdAnnonce(annonceId);
     }
+
 
 }
