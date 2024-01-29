@@ -19,20 +19,21 @@ public class StatistiqueService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Statistique[]> getVenteGroupByDate(String customQuery) {
+    public List<Statistique> getVenteGroupByDate(String customQuery) {
         return jdbcTemplate.query(customQuery, (resultSet, rowNum) -> {
             int nombreVentes = resultSet.getInt("nombre");
             LocalDate jourVente = resultSet.getDate("date_vendu").toLocalDate();
-            return new Statistique[]{new Statistique(nombreVentes, jourVente)};
+            return new Statistique(nombreVentes, jourVente);
         });
     }
-    public List<Statistique[]> getBestSeller(String customQuery) {
+    public List<Statistique> getBestSeller(String customQuery) {
         return jdbcTemplate.query(customQuery, (resultSet, rowNum) -> {
             int nombreVentes = resultSet.getInt("nombre");
             Utilisateur utilisateur = new Utilisateur();
             utilisateur.setNom(resultSet.getString("nom"));
-            return new Statistique[]{new Statistique(nombreVentes, utilisateur)};
+            return new Statistique(nombreVentes, utilisateur);
         });
     }
+
 
 }

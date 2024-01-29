@@ -14,13 +14,13 @@ public class StatistiqueController {
     private StatistiqueService statistiqueService;
 
     @GetMapping("/statByDate")
-    public List<Statistique[]> getByDate() {
+    public List<Statistique> getByDate() {
         String customQuery = "select sum(nombre) as nombre,date_vendu from annonce_vendu group by date_vendu";
         return statistiqueService.getVenteGroupByDate(customQuery);
     }
 
     @GetMapping("/statByUtilisateur")
-    public List<Statistique[]> getByUtilisateur() {
+    public List<Statistique> getByUtilisateur() {
         String customQuery = " select sum(nombre) as nombre, nom from annonce_vendu group by nom";
         return statistiqueService.getBestSeller(customQuery);
     }
