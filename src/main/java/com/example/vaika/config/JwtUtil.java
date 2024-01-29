@@ -21,7 +21,8 @@ public class JwtUtil {
     private Set<String> blacklistedTokens = new HashSet<>();
     public static String createToken(Utilisateur user){
         Date now = new Date();
-        Date validity = new Date(now.getTime()+3_600_000);
+       Date validity = new Date(now.getTime() + 3 * 60 * 60 * 1000);
+
 
         return JWT.create()
                 .withIssuer(user.getNom())
