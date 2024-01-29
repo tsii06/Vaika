@@ -13,11 +13,19 @@ public class StatistiqueController {
     @Autowired
     private StatistiqueService statistiqueService;
 
-    @GetMapping("/statistique")
-    public List<Statistique[]> getCustomStatistiques() {
-        String customQuery = "SELECT * FROM annonce_vendu";
+    @GetMapping("/statByDate")
+    public List<Statistique[]> getByDate() {
+        String customQuery = "select sum(nombre) as nombre,datevendu from annonce_vendu group by datevendu";
         return statistiqueService.getVenteGroupByDate(customQuery);
     }
+
+    @GetMapping("/statByUtilisateur")
+    public List<Statistique[]> getByUtilisateur() {
+        String customQuery = " select sum(nombre) as nombre, nom from annonce_vendu group by nom";
+        return statistiqueService.getBestSeller(customQuery);
+    }
+
+
 
 
 }

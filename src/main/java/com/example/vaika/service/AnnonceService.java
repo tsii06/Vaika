@@ -2,16 +2,23 @@ package com.example.vaika.service;
 
 import com.example.vaika.modele.Annonce;
 import com.example.vaika.modele.Recherche;
+import com.example.vaika.modele.Utilisateur;
+import com.example.vaika.modele.Voiture;
 import com.example.vaika.repo.AnnonceRepository;
+import com.example.vaika.repo.UtilisateurRepository;
+import com.example.vaika.repo.VoitureRepository;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AnnonceService {
@@ -46,7 +53,7 @@ public class AnnonceService {
             if (recherche.getKilometrage() != 0) {
                 predicates.add(cb.greaterThanOrEqualTo(root.get("voiture").get("kilometrage"), recherche.getKilometrage()));
             }
-            if (recherche.getKilometrage() != 0) {
+            if (recherche.getAnnee() != 0) {
                 predicates.add(cb.greaterThanOrEqualTo(root.get("voiture").get("annee"), recherche.getKilometrage()));
             }
             return cb.and(predicates.toArray(new Predicate[0]));
@@ -54,4 +61,7 @@ public class AnnonceService {
         List<Annonce> result = annonceRepository.findAll(spec);
         return result;
     }
+
+
+
 }

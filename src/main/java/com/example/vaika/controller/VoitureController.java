@@ -49,6 +49,8 @@ public class VoitureController {
         }
     }
 
+
+
     @PutMapping("/voiture/{id}")
     public ResponseEntity<Voiture> updateVoiture(@PathVariable(value = "id") Long voitureId,
                                                  @RequestBody Voiture voitureDetails) {
