@@ -22,25 +22,25 @@ public class PhotosService {
         this.photosRepository = photosRepository;
     }
 
-    public String toBase64(String imagePath) throws Exception{
-        File input = new File(imagePath);
-        File output = new File(imagePath);
-        Thumbnails.of(input)
+    public String toBase64(File file) throws Exception{
+        Thumbnails.of(file)
                 .size(400,400)
                 .outputQuality(0.7)
-                .toFile(output);
-        try(FileInputStream image = new FileInputStream(output)){
-            byte [] imageData = new byte[(int) output.length()];
+                .toFile(file);
+        try(FileInputStream image = new FileInputStream(file)){
+            byte [] imageData = new byte[(int) file.length()];
             image.read(imageData);
             return Base64.getEncoder().encodeToString(imageData);
         }
     }
 
-    public void upload(Photos photos) throws Exception {
-        String bean = this.toBase64(photos.getPath());
+    public Photos upload(Long idAnnonce,File file) throws Exception {
+        String bean = this.toBase64(file);
+        Photos photos = new Photos();
         photos.setPath(bean);
+        photos.setIdAnnonce(idAnnonce);
         System.out.println(photos.getPath());
-        this.photosRepository.save(photos);
+        return this.photosRepository.save(photos);
     }
 
 

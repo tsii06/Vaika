@@ -22,7 +22,7 @@ public class StatistiqueService {
     public List<Statistique[]> getVenteGroupByDate(String customQuery) {
         return jdbcTemplate.query(customQuery, (resultSet, rowNum) -> {
             int nombreVentes = resultSet.getInt("nombre");
-            LocalDate jourVente = resultSet.getDate("datevendu").toLocalDate();
+            LocalDate jourVente = resultSet.getDate("date_vendu").toLocalDate();
             return new Statistique[]{new Statistique(nombreVentes, jourVente)};
         });
     }

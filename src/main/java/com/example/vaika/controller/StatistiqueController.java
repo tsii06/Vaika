@@ -15,7 +15,7 @@ public class StatistiqueController {
 
     @GetMapping("/statByDate")
     public List<Statistique[]> getByDate() {
-        String customQuery = "select sum(nombre) as nombre,datevendu from annonce_vendu group by datevendu";
+        String customQuery = "select sum(nombre) as nombre,date_vendu from annonce_vendu group by date_vendu";
         return statistiqueService.getVenteGroupByDate(customQuery);
     }
 
