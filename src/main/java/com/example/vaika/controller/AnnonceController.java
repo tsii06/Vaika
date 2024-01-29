@@ -56,8 +56,8 @@ public class AnnonceController {
         }
     }
 
-    @GetMapping("/annonces/{idStatut}")
-    ResponseEntity<List<Annonce>> getAnnonceByStatut(@PathVariable(value = "idstatut") int idStatut) {
+    @GetMapping("/annonce/statut/{statut}")
+    ResponseEntity<List<Annonce>> getAnnonceByStatut(@PathVariable(value = "statut") int idStatut) {
         List<Annonce> annonces = annonceRepository.findAnnoncesByStatut(idStatut);
 
         if (!annonces.isEmpty()) {
