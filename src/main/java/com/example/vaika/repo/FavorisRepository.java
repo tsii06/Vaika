@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface FavorisRepository extends JpaRepository<Favoris, Long> {
     List<Favoris> findByUtilisateurIdUtilisateur(Long utilisateurId);
+
+    Long countByAnnonceIdAnnonce(Long idAnnonce);
 }
 

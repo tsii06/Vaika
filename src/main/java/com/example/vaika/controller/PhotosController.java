@@ -14,6 +14,8 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 @RestController
 public class PhotosController {
@@ -33,18 +35,29 @@ public class PhotosController {
     }
 
     @PostMapping("/upload")
-    public Photos uploadPhoto(@RequestParam("idAnnonce") Long idAnnonce, @RequestPart("file")MultipartFile file) throws Exception {
+    public List<Photos> uploadPhotos(@RequestParam("idAnnonce") Long idAnnonce, @RequestPart("files") List<MultipartFile> files) {
+        List<Photos> uploadedPhotos = new ArrayList<>();
+
         try {
-            Path tempPath = Files.createTempFile("temp","jpg");
-            Files.copy(file.getInputStream(),tempPath, StandardCopyOption.REPLACE_EXISTING);
-            String absolutePath = tempPath.toAbsolutePath().toString();
-            File uploadPhoto = new File(absolutePath);
-            return photosService.upload(idAnnonce,uploadPhoto);
+            for (MultipartFile file : files) {
+                // Créez un fichier temporaire pour chaque photo
+                Path tempPath = Files.createTempFile("temp", "jpg");
+                Files.copy(file.getInputStream(), tempPath, StandardCopyOption.REPLACE_EXISTING);
+                String absolutePath = tempPath.toAbsolutePath().toString();
+                File uploadPhoto = new File(absolutePath);
+
+                // Ajoutez chaque photo à la liste des photos téléchargées
+                Photos uploadedPhoto = photosService.upload(idAnnonce, uploadPhoto);
+                uploadedPhotos.add(uploadedPhoto);
+            }
+
+            return uploadedPhotos;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error during photo upload: " + e.getMessage());
+            return Collections.emptyList();
         }
-        return new Photos();
     }
+
     @Transactional
     @GetMapping("/photos/{idAnnonce}")
     public List<Photos> getPhotoByIdAnnonce(@PathVariable(value = "idAnnonce") int annonceId) {

@@ -35,4 +35,10 @@ public class FavorisController {
         favorisRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/countByAnnonce/{idAnnonce}")
+    public ResponseEntity<Long> getCountByAnnonce(@PathVariable(value = "idAnnonce") Long idAnnonce) {
+        Long count = favorisRepository.countByAnnonceIdAnnonce(idAnnonce);
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
 }

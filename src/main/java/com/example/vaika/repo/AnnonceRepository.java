@@ -11,4 +11,5 @@ import java.util.List;
 public interface AnnonceRepository extends JpaRepository<Annonce, Long>, JpaSpecificationExecutor<Annonce> {
     List<Annonce> findByUtilisateurIdUtilisateur(Long idUtilisateur);
     List<Annonce> findAnnoncesByStatut(int statuts);
+
 }
