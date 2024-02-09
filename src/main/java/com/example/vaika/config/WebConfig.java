@@ -23,6 +23,7 @@ public class WebConfig {
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:8100");
         config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedOrigin("https://frontoffice.netlify.app");
         config.addAllowedOrigin("https://vocal-palmier-982552.netlify.app");
         config.setAllowedHeaders(Arrays.asList(
                 HttpHeaders.AUTHORIZATION,
